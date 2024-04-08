@@ -1,0 +1,367 @@
+﻿@model HomeViewModel
+<!--====== Slider Part Start ======-->
+
+<section class="slider-area slider-3">
+    <div class="container-fluid custom-container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="slider-active mt-30">
+                    @foreach (var slider in Model.Sliders)
+                    {
+                        <div class="single-slider">
+                            <div class="slider-image">
+                                <img src="~/uploads/sliders/@slider.ImageUrl" alt="slider">
+                            </div>
+                            <div class="slider-content-wrapper">
+                                <div class="slider-content">
+                                    <h1 data-animation="bounceInDown" data-delay="0.2s" class="main-title ">@slider.Title1</h1>
+                                    <p data-animation="bounceInDown" data-delay="0.5s"><br>@slider.Title2</p>
+                                    <a data-animation="zoomIn" data-delay="0.8s" class="main-btn " href="@slider.RedirectUrl">@slider.RedirectUrlText</a>
+                                </div>
+                            </div>
+                        </div> <!-- single slider -->
+                    }
+                </div>
+            </div>
+            <div class="col-lg-4">
+                @foreach (var banner in Model.Banners.Take(2))
+                {
+                    <div class="slider-banner mt-30">
+                        <a href="@banner.RedirectUrl"><img src="~/uploads/banners/@banner.ImageUrl" alt="banner"></a>
+                    </div> <!-- slider banner -->
+                }
+            </div>
+        </div> <!-- row -->
+    </div> <!-- container -->
+
+</section>
+
+<!--====== Slider Part Ends ======-->
+<!--====== Features Banner Part Start ======-->
+
+<div class="features-banner-area pt-95">
+    <div class="container-fluid custom-container">
+        <div class="features-banner-wrapper d-flex flex-wrap">
+            <div class="single-features-banner d-flex">
+                <div class="banner-icon">
+                    <img src="~/assets/images/banner-icon/icon1.png" alt="Icon">
+                </div>
+                <div class="banner-content media-body">
+                    <h3 class="banner-title">Free Shipping</h3>
+                    <p>Free shipping on all US order</p>
+                </div>
+            </div> <!-- single features banner -->
+            <div class="single-features-banner d-flex">
+                <div class="banner-icon">
+                    <img src="~/assets/images/banner-icon/icon2.png" alt="Icon">
+                </div>
+                <div class="banner-content media-body">
+                    <h3 class="banner-title">Support 24/7</h3>
+                    <p>Contact us 24 hours a day</p>
+                </div>
+            </div> <!-- single features banner -->
+            <div class="single-features-banner d-flex">
+                <div class="banner-icon">
+                    <img src="~/assets/images/banner-icon/icon3.png" alt="Icon">
+                </div>
+                <div class="banner-content media-body">
+                    <h3 class="banner-title">100% Money Back</h3>
+                    <p>You have 30 days to Return</p>
+                </div>
+            </div> <!-- single features banner -->
+            <div class="single-features-banner d-flex">
+                <div class="banner-icon">
+                    <img src="~/assets/images/banner-icon/icon4.png" alt="Icon">
+                </div>
+                <div class="banner-content media-body">
+                    <h3 class="banner-title">90 Days Return</h3>
+                    <p>If goods have problems</p>
+                </div>
+            </div> <!-- single features banner -->
+            <div class="single-features-banner d-flex">
+                <div class="banner-icon">
+                    <img src="~/assets/images/banner-icon/icon5.png" alt="Icon">
+                </div>
+                <div class="banner-content media-body">
+                    <h3 class="banner-title">Payment Secure</h3>
+                    <p>We ensure secure payment</p>
+                </div>
+            </div> <!-- single features banner -->
+        </div> <!-- features banner wrapper -->
+    </div> <!-- container -->
+</div>
+
+<!--====== Features Banner Part Ends ======-->
+<!--====== Product Part Start ======-->
+
+<section class="product-area pt-100">
+    <div class="container-fluid custom-container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="product-menu pb-30">
+                    <ul class="nav justify-content-center" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="active" id="new-tab" data-toggle="tab" href="#new" role="tab" aria-controls="new" aria-selected="true">New Arrival</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a id="bestseller-tab" data-toggle="tab" href="#bestseller" role="tab" aria-controls="bestseller" aria-selected="false">Bestseller</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a id="featured-tab" data-toggle="tab" href="#featured" role="tab" aria-controls="featured" aria-selected="false">Featured</a>
+                        </li>
+                    </ul>
+                </div> <!-- product menu -->
+            </div>
+        </div> <!-- row -->
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="new" role="tabpanel" aria-labelledby="new-tab">
+                <div class="product-items">
+                    <div class="row product-active">
+                        @await Html.PartialAsync("_ProductListlPartial", Model.Products.Where(x => x.IsNew == true).Take(5).ToList())
+                    </div> <!-- row -->
+
+                </div> <!-- product items -->
+            </div>
+            <div class="tab-pane fade" id="bestseller" role="tabpanel" aria-labelledby="bestseller-tab">
+                <div class="product-items">
+                    <div class="row product-active">
+                        @await Html.PartialAsync("_ProductListlPartial", Model.Products.Where(x => x.IsBestSeller == true).Take(5).ToList())
+
+                    </div> <!-- row -->
+                </div> <!-- product items -->
+            </div>
+            <div class="tab-pane fade" id="featured" role="tabpanel" aria-labelledby="featured-tab">
+                <div class="product-items">
+                    <div class="row product-active">
+                        @await Html.PartialAsync("_ProductListlPartial", Model.Products.Where(x => x.IsFeatured == true).Take(5).ToList())
+
+                    </div> <!-- row -->
+                </div> <!-- product items -->
+            </div>
+        </div> <!-- tab content -->
+    </div> <!-- container -->
+</section>
+
+<!--====== Product Part Ends ======-->
+<!--====== Banner Part Start ======-->
+
+<div class="banner-area pt-70">
+    <div class="container-fluid custom-container">
+        <div class="row">
+            @foreach (var banner in Model.Banners.Take(2))
+            {
+                <div class="col-md-6">
+                    <div class="banner-image banner-2">
+                        <a href="@banner.RedirectUrl"><img src="~/uploads/banners/@banner.ImageUrl" alt="banner"></a>
+                    </div> <!-- banner image -->
+                </div>
+            }
+        </div>
+    </div> <!-- row -->
+</div> <!-- container -->
+<!--====== Banner Part Ends ======-->
+<!--====== Product Part Start ======-->
+<section class="product-area pt-100">
+    @{
+        Category[] categories = Model.Categories.Take(3).ToArray();
+    }
+    <div class="container-fluid custom-container">
+     @*    <div class="row">
+            <div class="col-lg-12">
+                <div class="product-menu pb-30">
+                    <ul class="nav justify-content-center" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="active" id="computer-tab" data-toggle="tab" href="#computer" role="tab" aria-controls="computer" aria-selected="true">@categories[0]?.Name</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a id="smartphone-tab" data-toggle="tab" href="#smartphone" role="tab" aria-controls="smartphone" aria-selected="false">@categories[1]?.Name</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a id="game-tab" data-toggle="tab" href="#game" role="tab" aria-controls="game" aria-selected="false">@categories[2]?.Name</a>
+                        </li>
+                    </ul>
+                </div> <!-- product menu -->
+            </div>
+        </div> <!-- row --> *@
+        <div class="tab-content">
+
+            <div class="tab-pane fade show active" id="computer" role="tabpanel" aria-labelledby="new-tab">
+                <div class="product-items">
+                    <div class="row product-active">
+                        @await Html.PartialAsync("_ProductListlPartial", Model.Products.Where(x => x.IsDeactive == false && x.CategoryId == categories[0].Id).Take(5).ToList())
+                    </div> <!-- row -->
+                </div> <!-- product items -->
+            </div>
+            <div class="tab-pane fade" id="smartphone" role="tabpanel" aria-labelledby="smartphone-tab">
+                <div class="product-items">
+                    <div class="row product-active">
+                        @await Html.PartialAsync("_ProductListlPartial", Model.Products.Where(x => x.IsDeactive == false && x.CategoryId == categories[1].Id).Take(5).ToList())
+
+                    </div> <!-- row -->
+                </div> <!-- product items -->
+            </div>
+            <div class="tab-pane fade" id="game" role="tabpanel" aria-labelledby="game-tab">
+                <div class="product-items">
+                    <div class="row product-active">
+                        @await Html.PartialAsync("_ProductListlPartial", Model.Products.Where(x => x.IsDeactive == false && x.CategoryId == categories[2].Id).Take(5).ToList())
+
+                    </div> <!-- row -->
+                </div> <!-- product items -->
+            </div>
+        </div> <!-- tab content -->
+    </div> <!-- container -->
+</section>
+<!--====== Product Part Ends ======-->
+<!--====== Special Category Part Start ======-->
+
+<section class="special-category-area pt-50">
+    <div class="container-fluid custom-container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="special-product-2 mt-50">
+                    <div class="special-product-countdown-2 mt-50">
+                        <h2 class="special-title">Deal of the week</h2>
+                        <div data-countdown="2021/12/19"></div>
+                    </div> <!-- special product countdown -->
+                    @{
+                        Product product = Model.Products.FirstOrDefault();
+                    }
+                    <div class="special-product-gallery-2">
+                       @*  <div class="product-gallery-image-2">
+                            <div class="single-products-image">
+                                <a href="#">
+                                    <img src="~/uploads/products/@product.ProductImages.FirstOrDefault(x=>x.IsPoster==true).Url" alt="products">
+                                </a>
+                            </div>
+                            <div class="single-products-image">
+                                <a href="#">
+                                    <img src="~/uploads/products/@product.ProductImages.FirstOrDefault(x=>x.IsPoster==false).Url" alt="products">
+                                </a>
+                            </div>
+                        </div> *@
+                        <div class="product-gallery-thumb-2">
+                            <ul class="product-thumb-2">
+                                <li><img src="~/assets/images/special-products/special-products-1.jpg" alt="Products Thumb"></li>
+                                <li><img src="~/assets/images/special-products/special-products-2.jpg" alt="Products Thumb"></li>
+                                <li><img src="~/assets/images/special-products/special-products-3.jpg" alt="Products Thumb"></li>
+                                <li><img src="~/assets/images/special-products/special-products-4.jpg" alt="Products Thumb"></li>
+                                <li><img src="~/assets/images/special-products/special-products-5.jpg" alt="Products Thumb"></li>
+                            </ul>
+                        </div>
+                        @* <h2 class="product-title"><a href="#">@product?.Title</a></h2> *@
+                        <ul class="products-rating">
+                            <li class="rating-on"><i class="fas fa-star"></i></li>
+                            <li class="rating-on"><i class="fas fa-star"></i></li>
+                            <li class="rating-on"><i class="fas fa-star"></i></li>
+                            <li class="rating-on"><i class="fas fa-star"></i></li>
+                            <li class="rating-on"><i class="fas fa-star"></i></li>
+                        </ul>
+                      @*   <div class="product-price-and-cart d-sm-flex align-items-center">
+                            <div class="product-price">
+                                @{
+                                    double price = product.SalePrice * ((100 - @product.DiscountPercent) / 100);
+                                }
+                                <span class="price-sale">$@price</span>
+                                <span class="regular-price">$@product.SalePrice</span>
+                            </div>
+                            <div class="product-cart">
+                                <a class="main-btn main-btn-2" asp-action="addtocart" asp-controller="home" asp-route-productid="@product.Id">Add to cart</a>
+                            </div>
+                        </div> *@
+                    </div>
+                </div> <!-- special product -->
+            </div>
+            <div class="col-lg-8">
+                <div class="row justify-content-center mt-50">
+                    <div class="col-lg-6">
+                        <div class="section-title text-center pb-30">
+                            <h2 class="title">Featured Categories</h2>
+                        </div>
+                    </div>
+                </div> <!-- row -->
+
+                <div class="row category-active-2" style="margin-bottom: 15px;">
+                    @foreach (var item in Model.Categories)
+                    {
+                        <div class="col-lg-2">
+                            <div class="single-category text-center" style="margin-bottom: 15px;">
+                                <a target="_blank" asp-action="Index" asp-controller="Shop" asp-route-categoryid="@item.Id" style="text-decoration: none; color: #333; display: block;">
+                                    <p style="margin: 0;">@item.Name</p>
+                                </a>
+                            </div> <!-- single category -->
+                        </div>
+                    }
+                </div>
+                    <div class="container-fluid custom-container">
+                        <div class="row">
+                            @foreach (var banner in Model.Banners.Take(2))
+                            {
+                                <div class="col-md-6">
+                                    <div class="banner-image banner-2">
+                                        <a href="@banner.RedirectUrl"><img src="~/uploads/banners/@banner.ImageUrl" alt="banner"></a>
+                                    </div> <!-- banner image -->
+                                </div>
+                            }
+                        </div>
+                    </div> <!-- row -->
+                <div class="container-fluid custom-container">
+                    <div class="row">
+                        @foreach (var banner in Model.Banners.Skip(2).Take(2))
+                        {
+                            <div class="col-md-6">
+                                <div class="banner-image banner-2">
+                                    <a href="@banner.RedirectUrl"><img src="~/uploads/banners/@banner.ImageUrl" alt="banner"></a>
+                                </div> <!-- banner image -->
+                            </div>
+                        }
+                    </div>
+                </div> <!-- row -->
+               
+
+            </div>
+        </div> <!-- container -->
+</section>
+
+<!--====== Special Category Part Ends ======-->
+<!--====== Blog Part Start ======-->
+
+<section class="blog-area pt-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="section-title text-center pb-30">
+                    <h2 class="title">From Our Blog </h2>
+                </div>
+            </div>
+        </div> <!-- row -->
+        <div class="row blog-active">
+            @foreach (var blog in Model.Blogs)
+            {
+                <div class="col-lg-4">
+                    <div class="single-blog">
+                        <div class="blag-image">
+                            <a asp-action="blog" asp-controller="home"><img src="~/uploads/blogs/@blog.ImageUrl" alt="Blog"></a>
+                            <p class="meta-date">
+                                <span class="day">@blog.Date</span>
+                            </p>
+                        </div>
+                        <div class="blag-content">
+                            <h2 class="blog-title"><a href="blog-single-left-sidebar.html">@blog.Title</a></h2>
+                            <p>@blog.Desc</p>
+                        </div>
+                    </div> <!-- single blog -->
+                </div>
+            }
+        </div>
+    </div> <!-- row -->
+    </div> <!-- container -->
+</section>
+
+<!--====== Blog Part Ends ======-->
+<script>
+    var detailBtn = document.querySelectorAll(".detailClick")
+    var detailView = document.querySelectorAll(".detailView")
+    detailBtn.on("click", function () {
+        detailView.toggle();
+    });
+</script>
